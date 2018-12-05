@@ -66,6 +66,11 @@ class SayNumberSpec extends WordSpec with MustMatchers {
     "return 'One Hundred and Seventy Six Million Nine Hundred Thousand Two Hundred and Fourteen' when given 176900214" in {
       SayNumber.speak("176900214") mustBe "One Hundred and Seventy Six Million Nine Hundred Thousand Two Hundred and Fourteen"
     }
+
+    "return 'One Billion and Forty Thousand' when given 1000040000" in {
+      SayNumber.speak("1000040000") mustBe "One Billion and Forty Thousand"
+    }
+
     "return 'Five Billion Six Hundred and Seventy Eight Million Nine Hundred and One Thousand Two Hundred and Three' when given 5678901203" in {
       SayNumber.speak("5678901203") mustBe "Five Billion Six Hundred and Seventy Eight Million Nine Hundred and One Thousand Two Hundred and Three"
     }
@@ -92,6 +97,10 @@ class SayNumberSpec extends WordSpec with MustMatchers {
 
     "return 'Minus Fifty Nine' when given -59" in {
       SayNumber.speak("-59") mustBe "Minus Fifty Nine"
+    }
+
+    "return 'Minus 6 Trillion Five Billion Six Hundred and Seventy Eight Million Nine Hundred and One Thousand Two Hundred and Three' when given -6005678901203" in {
+      SayNumber.speak("-6005678901203") mustBe "Minus Six Trillion Five Billion Six Hundred and Seventy Eight Million Nine Hundred and One Thousand Two Hundred and Three"
     }
   }
 }

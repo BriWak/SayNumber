@@ -9,11 +9,21 @@ object SayNumber extends App {
 
     val numberByThousands = isNegative.number.reverse.grouped(3).toList.map(_.reverse)
 
-    val separators = List("", " Thousand ", " Million ", " Billion ")
+    val andOrNot = if (isNegative.number.length > 3 && isNegative.number.charAt(isNegative.number.length-3).toString == "0"){
+      "and "
+    } else {
+      ""
+    }
+
+    val separators = List("", " Thousand ", " Million ", " Billion ", " Trillion ")
 
     val hundredsAsWords = numberByThousands.map(trebles)
 
-    isNegative.indicator + hundredsAsWords.zip(separators).reverse.flatMap(_.productIterator.toList).mkString("").trim
+    val filteredList = hundredsAsWords.zip(separators).reverse.filterNot(_._1 == "").flatMap(_.productIterator.toList)
+
+    val withAnd = filteredList.patch(filteredList.length - 2,  List(andOrNot), 0)
+
+    isNegative.indicator + withAnd.mkString("").replace("  "," ").trim
   }
 
   private def handleNegative(number: String): Negative = {
@@ -69,5 +79,5 @@ object SayNumber extends App {
     case 3  if number.tail.toString == "00" => singles(number.head.toString) + " Hundred"
     case _  => singles(number.head.toString) + " Hundred and " + doubles(number.tail)
   }
-
+  
 }
